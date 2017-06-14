@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Newtonsoft.Json;
 
 namespace naithar
 {
@@ -13,6 +14,18 @@ namespace naithar
 		{
 			void Encode(System.Net.Http.HttpRequestMessage request, HTTP.Parameters parameters);
 		}
+
+        public class JSONEncoder : HTTP.Encoder {
+
+            public static readonly JSONEncoder Instance = new JSONEncoder();
+
+            public void Encode(System.Net.Http.HttpRequestMessage request, HTTP.Parameters parameters)
+            {
+                var json = JsonConvert.SerializeObject(parameters);
+                request.Content = new StringContent(json);
+                request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            }                
+        }
 
         public class MultipartEncoder : HTTP.Encoder {
 
