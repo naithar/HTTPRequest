@@ -6,7 +6,9 @@
 ////
 using System;
 using System.IO;
-//using System.Collections.Generic;
+using System.Net.Http;
+
+using System.Collections.Generic;
 //using System.Net;
 
 using System.Threading.Tasks;
@@ -15,6 +17,31 @@ using System.Threading.Tasks;
 namespace naithar {
 
     public static class Extensions {
+
+		public static void AddRange<T, U>(this IDictionary<T, U> source, IDictionary<T, U> other)
+		{
+			foreach (var item in other)
+			{
+				source.Add(item.Key, item.Value);
+			}
+		}
+
+        internal static System.Net.Http.HttpMethod Method(this HTTP.Method m) {
+            switch (m) {
+                case HTTP.Method.POST:
+                    return HttpMethod.Post;
+                case HTTP.Method.PUT:
+                    return HttpMethod.Put;
+                case HTTP.Method.OPTIONS:
+                    return HttpMethod.Options;
+                case HTTP.Method.HEAD:
+                    return HttpMethod.Head;
+                case HTTP.Method.DELETE:
+                    return HttpMethod.Delete;
+                default:
+                    return HttpMethod.Get;    
+            }
+        }
 
         public static Task<byte[]> Bytes(this System.IO.Stream stream, int chunkSize = 0) {
             return Task.Run(() =>
@@ -219,14 +246,10 @@ namespace naithar {
 //        }
 //    }
 
-//    public static partial class DictionaryExtensions {
+ //   public static partial class DictionaryExtensions {
 
-//		public static void AddRange<T, U>(this IDictionary<T, U> source, IDictionary<T, U> other) {
-//			foreach (var item in other) {
-//				source.Add(item.Key, item.Value);
-//			}
-//		}
-//	}
+		
+	//}
 
 //	public static partial class StreamExtensions {
 //		public static byte[] ByteArray(this Stream stream) {
