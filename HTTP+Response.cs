@@ -5,9 +5,16 @@ namespace naithar {
 
     public partial class HTTP {
 
-		public class Response
-		{
-			public System.Net.Http.HttpResponseMessage response = null;
+        public class Response
+        {
+            public System.Net.Http.HttpResponseMessage response { private set; get; }
+
+            public System.Net.HttpStatusCode StatusCode {
+                get {
+                    if (this.response == null) { return System.Net.HttpStatusCode.Unused; }
+                    return this.response.StatusCode;
+                }
+            }    
 
 			public bool isEmpty
 			{
@@ -55,7 +62,7 @@ namespace naithar {
 
 			public Response()
 			{
-
+                this.response = null;
 			}
 
 			public Response(System.Net.Http.HttpResponseMessage response)
