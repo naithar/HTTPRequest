@@ -11,11 +11,10 @@ namespace naithar
 
 		public interface Encoder
 		{
-
 			void Encode(System.Net.Http.HttpRequestMessage request, HTTP.Parameters parameters);
 		}
 
-        public class Multipart : HTTP.Encoder {
+        public class MultipartEncoder : HTTP.Encoder {
 
             public class File {
 
@@ -62,11 +61,11 @@ namespace naithar
 
             private File[] files = {};
 
-			public Multipart()
+			public MultipartEncoder()
 			{
 			}
 
-            public Multipart(File[] files) {
+            public MultipartEncoder(File[] files) {
                 this.files = files;
             }
 
