@@ -1,81 +1,78 @@
-﻿//
-// WebInterfaces.cs
-//
-// Created by Sergey Minakov on 17.03.2016.
-//
-//
+﻿////
+//// WebInterfaces.cs
+////
+//// Created by Sergey Minakov on 17.03.2016.
+////
+////
 
-using System;
-using System.Threading.Tasks;
-using System.IO;
-using System.Collections.Generic;
-using System.Net;
+//using System;
+//using System.Threading.Tasks;
+//using System.IO;
+//using System.Net;
 
-//TODO: summary, comments.
+//namespace mapp.core {
 
-namespace mapp.core {
+//	public enum WebResponseStatus {
+//		Success,
+//		Failed
+//	}
 
-	public enum WebResponseStatus {
-		Success,
-		Failed
-	}
+//	public abstract class IWebResponse<T> {
 
-	public abstract class IWebResponse<T> {
+//		Task<String> String {
+//			get;
+//		}
 
-		Task<String> String {
-			get;
-		}
+//		Task<Stream> Stream {
+//			get;
+//		}
 
-		Task<Stream> Stream {
-			get;
-		}
+//		WebResponseStatus Status {
+//			get;
+//		}
 
-		WebResponseStatus Status {
-			get;
-		}
+//		HttpStatusCode StatusCode {
+//			get;
+//		}
 
-		HttpStatusCode StatusCode {
-			get;
-		}
+//		T Response {
+//			get;
+//		}
+//	}
 
-		T Response {
-			get;
-		}
-	}
+//	public interface IWebRequest<T> {
 
-	public interface IWebRequest<T> {
+//		string Path {
+//			get;
+//			set;
+//		}
 
-		string Path {
-			get;
-			set;
-		}
+//		T Method {
+//			get;
+//			set;
+//		}
 
-		T Method {
-			get;
-			set;
-		}
+//		Uri BuildRequestUri(string baseUrl = null);
 
-		Uri BuildRequestUri(string baseUrl = null);
+//		TimeSpan Timeout {
+//			get;
+//			set;
+//		}
 
-		TimeSpan Timeout {
-			get;
-			set;
-		}
+//		bool UseBaseUrl {
+//			get;
+//			set;
+//		}
+//	}
 
-		bool UseBaseUrl {
-			get;
-			set;
-		}
-	}
+//	public interface IWebPerformer<T, U> {
 
-	public interface IWebPerformer<T, U> {
+//		string BaseUrl {
+//			get;
+//			set;
+//		}
 
-		string BaseUrl {
-			get;
-			set;
-		}
+//		Task<T> Perform(U request);
+//	}
 
-		Task<T> Perform(U request);
-	}
-
-}
+//}
