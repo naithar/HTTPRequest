@@ -43,6 +43,9 @@ namespace naithar {
             {
                 get
                 {
+                    if (this.response == null) {
+                        return Task.Run(() => { return (System.IO.Stream)(new System.IO.MemoryStream()); });
+                    }
                     return this.response.Content.ReadAsStreamAsync();
                 }
             }
@@ -51,12 +54,20 @@ namespace naithar {
             {
                 get
                 {
+                    if (this.response == null)
+                    {
+                        return Task.Run(() => { return ""; });
+                    }
                     return this.response.Content.ReadAsStringAsync();
                 }
             }
 
             public Task<byte[]> Bytes {
                 get {
+					if (this.response == null)
+					{
+                        return Task.Run(() => { return new byte[]{ }; });
+					}
                     return this.response.Content.ReadAsByteArrayAsync();
                 }
             }
@@ -76,7 +87,6 @@ namespace naithar {
 
         public HTTP(string BaseURL = null) {
             this.BaseURL = BaseURL;
-
         }
 
         public Task<HTTP.Response> Perform(
@@ -87,7 +97,14 @@ namespace naithar {
             return Task<HTTP.Response>.Run(async () =>
             {
                 var client = new System.Net.Http.HttpClient();
-                return new HTTP.Response(await client.GetAsync(URL));
+
+                switch (method) {
+                    case Method.GET:
+                        return new HTTP.Response(await client.GetAsync(URL));
+                    default: return new HTTP.Response();
+                        
+                }
+
             });
         }
     }
